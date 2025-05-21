@@ -34,8 +34,8 @@ Answer:
 """
 
 # Ollama Configuration
+OLLAMA_LLM_MODEL = "phi4"
 OLLAMA_BASE_URL = "http://localhost:11434"
-OLLAMA_LLM_MODEL = "llama3"
 OLLAMA_EMBEDDING_MODEL = "mxbai-embed-large"
 
 # RAG Configuration
