@@ -8,7 +8,14 @@ from langchain_ollama import OllamaLLM
 QA_PROMPT_TEMPLATE_STR = """
 You are a helpful AI assistant. Your task is to answer the user's question or query based only on the provided context retrieved from a knowledge graph.
 
-The context consists of text chunks from documents related to medicines and its attributes such as Medicine, Generic, TherapeuticClass, Indication, Manufacturer.
+The context consists of text chunks from documents related to medicines and its attributes such as Medicine, Generic, TherapeuticClass, Indication, Manufacturer these are all in snake case.
+
+Remember the relationships as follows:
+Chunks -> HAS_CHUNK
+Manufacturer -> HAS_MANUFACTURER
+Generic -> HAS_GENERIC
+TherapeuticClass -> HAS_THERAPEUTIC_CLASS
+Indication -> HAS_INDICATION
 
 Each of the medicine is also contain medicine property like weight, medicine type, manufacturer
 Each of the Indication contain a full details about the symptoms or manifestations / disease / problem solution / treatment and possible prevention of the Indication.
@@ -21,7 +28,7 @@ If user input question or query match with any medicine name then you should sta
 If the context does not contain enough information to answer the question, state that clearly (e.g., "Based on the provided context, I cannot answer this question.").
 
 Do not make up information or use external knowledge.
-Be concise and directly answer the question.
+Note: Do not include apologies or internal words like chunks, score, etc in your responses, Be concise and directly answer the question.
 
 Provided Context:
 ---
@@ -34,7 +41,7 @@ Answer:
 """
 
 # Ollama Configuration
-OLLAMA_LLM_MODEL = "phi4"
+OLLAMA_LLM_MODEL = "llama3"
 OLLAMA_BASE_URL = "http://localhost:11434"
 OLLAMA_EMBEDDING_MODEL = "mxbai-embed-large"
 
@@ -61,7 +68,7 @@ def load_neo4j_graph():
 
 
 def get_ollama_llm():
-    return OllamaLLM(base_url=OLLAMA_BASE_URL, model=OLLAMA_LLM_MODEL)
+    return OllamaLLM(base_url=OLLAMA_BASE_URL, model=OLLAMA_LLM_MODEL, temperature=0.7)
 
 
 def get_ollama_embeddings():

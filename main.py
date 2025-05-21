@@ -68,7 +68,7 @@ def run_ingestion_pipeline(graph, file_paths):
 
 if __name__ == "__main__":
     # Configuration for Ingestion Pipeline
-    INGEST_DATA = False
+    INGEST_DATA = True
 
     if INGEST_DATA:
         # Data Ingestion: Specify the JSON files to ingest

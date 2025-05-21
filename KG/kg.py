@@ -44,7 +44,7 @@ def create_structured_medicine_graph(graph, medicine_data_list):
             main_node_query += """
             WITH m
             MATCH (mf:Manufacturer {name: $manufacturer_name})
-            MERGE (mf)-[:PRODUCES]->(m)
+            MERGE (mf)-[:HAS_MANUFACTURER]->(m)
             """
             params["manufacturer_name"] = manufacturer_name
 
@@ -73,7 +73,7 @@ def create_structured_medicine_graph(graph, medicine_data_list):
                 MERGE (t:TherapeuticClass {name: $class_name})
                 WITH t
                 MATCH (m:Medicine {name: $medicine_name})
-                MERGE (m)-[:BELONGS_TO_CLASS]->(t)
+                MERGE (m)-[:HAS_THERAPEUTIC_CLASS]->(t)
                 """,
                 params={"class_name": class_name, "medicine_name": medicine_name},
             )
@@ -90,7 +90,7 @@ def create_structured_medicine_graph(graph, medicine_data_list):
                 ON MATCH SET i.details_summary = $details_summary
                 WITH i
                 MATCH (m:Medicine {name: $medicine_name})
-                MERGE (m)-[:INDICATED_FOR]->(i)
+                MERGE (m)-[:HAS_INDICATION]->(i)
                 """
 
                 graph.query(
