@@ -68,7 +68,7 @@ def load_neo4j_graph():
 
 
 def get_ollama_llm():
-    return OllamaLLM(base_url=OLLAMA_BASE_URL, model=OLLAMA_LLM_MODEL, temperature=0.7)
+    return OllamaLLM(base_url=OLLAMA_BASE_URL, model=OLLAMA_LLM_MODEL, temperature=0.5)
 
 
 def get_ollama_embeddings():
