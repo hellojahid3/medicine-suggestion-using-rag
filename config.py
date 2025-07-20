@@ -38,10 +38,13 @@ Provided Context:
 User Question: {question}
 
 Answer:
+
+always add this line at the end of your answer:
+- Source: MedEx
 """
 
 # Ollama Configuration
-OLLAMA_LLM_MODEL = "llama2:7b"
+OLLAMA_LLM_MODEL = "gemma3:12b"
 OLLAMA_BASE_URL = "http://localhost:11434"
 OLLAMA_EMBEDDING_MODEL = "mxbai-embed-large"
 
